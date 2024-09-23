@@ -1,0 +1,133 @@
+export const FIELD_DATA = [
+	{
+		name: 'title',
+		title: 'Title',
+		sub_title: 'Title for your place, should be short and catchy as in advertisement',
+		type: 'text',
+		placeholder: 'title, for example: My lovely apt',
+		field_type: 'input',
+		required: true,
+	},
+	{
+		name: 'address',
+		title: 'Address',
+		sub_title: 'Address to this place',
+		type: 'text',
+		placeholder: 'address',
+		field_type: 'input',
+		required: true,
+	},
+	{
+		name: 'photoLink',
+		title: 'Photos',
+		sub_title: 'More the better',
+		type: 'photos',
+		placeholder: 'Adding using a link ....jpg',
+		field_type: 'photos',
+		required: true,
+	},
+	{
+		name: 'description',
+		title: 'Description',
+		sub_title: 'Description of the place',
+		type: 'textarea',
+		placeholder: '',
+		field_type: 'textarea',
+		required: true,
+	},
+	{
+		name: 'perks',
+		title: 'Perks',
+		sub_title: 'Select perks of your place',
+		type: 'checkbox',
+		placeholder: 'title, for example: My lovely apt',
+		field_type: 'checkbox',
+		items: [
+			{
+				type: 'checkbox',
+				name: 'wifi',
+				label: 'Wifi',
+			},
+			{
+				type: 'checkbox',
+				name: 'parking',
+				label: 'Free parking on Premises',
+			},
+			{
+				type: 'checkbox',
+				name: 'tv',
+				label: 'TV',
+			},
+			{
+				type: 'checkbox',
+				name: 'radio',
+				label: 'Radio',
+			},
+			{
+				type: 'checkbox',
+				name: 'kitchen',
+				label: 'Kitchen',
+			},
+			{
+				type: 'checkbox',
+				name: 'pets',
+				label: 'Pets',
+			},
+			{
+				type: 'checkbox',
+				name: 'entrance',
+				label: 'Private Entrance',
+			},
+		],
+	},
+	{
+		name: 'extraInfo',
+		title: 'Extra Info',
+		sub_title: 'House rules, etc',
+		type: 'textarea',
+		placeholder: 'title, for example: My lovely apt',
+		field_type: 'textarea',
+		required: true,
+	},
+	{
+		name: 'check-in-out',
+		title: 'Check In & Out times',
+		sub_title:
+			'Add check in and out time, remember to have some time window for cleaning the room between guests',
+		type: 'text',
+		field_type: 'group-input',
+		placeholder: '',
+		items: [
+			{
+				name: 'checkIn',
+				type: 'text',
+				label: 'Check-In time',
+				placeholder: '14:00',
+				required: true,
+			},
+			{
+				name: 'checkout',
+				type: 'text',
+				label: 'Check-Out time',
+				placeholder: '12:00',
+				required: true,
+			},
+			{
+				name: 'maxGuest',
+				type: 'number',
+				label: 'Maximum Number of Guest',
+				placeholder: '',
+				required: true,
+				min:1
+			},
+			{
+				name: 'price',
+				type: 'number',
+				label: 'Price per night',
+				placeholder: '',
+				required: true,
+				min: 1
+			},
+		],
+	},
+];
