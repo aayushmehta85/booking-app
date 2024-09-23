@@ -216,17 +216,12 @@ app.get('/user-places', async (req, res) => {
 	
 })
 
-app.post('/delete-user-place', async (req, res) => {
+app.post('/delete-user-place/:id', async (req, res) => {
 	const { id } = req.params;
 	try {
-		const placesData = await Place.deleteOne({ _id: id });
-		console.log(placeData);
-		return res.json({
-			status: '200',
-			description: 'Request successfully processed.',
-			data: placesData,
-		});
-	} catch (e) {
+		await Place.deleteOne({_id:id});
+		return res.json({ status: '200', description: 'Request successfully processed.' });
+	}catch (e) {
 		return res.json({
 			status: '500',
 			description: 'Request fail.',

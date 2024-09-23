@@ -28,8 +28,11 @@ const MyAccommodations = () => {
 
 	const removeAccomodation = async (id) => {
 		try {
-			const response = await _post('/delete-user-place', { id })
-			console.log("response",response)
+			const response = await _post(`/delete-user-place/${ id }`);
+			if (response?.data?.status === "200") {
+				const updatedArr = placesData.filter(place => place._id !== id)
+				setPlacesData(updatedArr);
+			}
 		} catch (e) {
 			console.log("remove api failed.")
 		}
