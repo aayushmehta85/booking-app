@@ -7,18 +7,35 @@ import PlaceImg from '../Common/PlaceImg'
 import MyBookingDetail from './dependencies/MyBookingDetail'
 
 const MyBookings = () => {
-  const { action } = useParams();
+	const { action } = useParams();
   const [bookingData, setBookingData] = useState([])
-  const [selecetedBookingDetail, setSelecetedBookingDetail] = useState({})
+  const [selecetedBookingDetail, setSelecetedBookingDetail] = useState(null)
   
   useEffect(() => {
-    getBookingDetails()
-  }, [])
+    getBookingDetailsList()
+	}, [])
+	
+	useEffect(() => {
+		if (action && !selecetedBookingDetail) {
+			getBookingDetails();
+		}
+	}, [])
+	
+	const getBookingDetails = async () => {
+		try {
+			const response = await _get(`/bookings/${action}`);
+			if (response?.data?.status === '200') {
+				setSelecetedBookingDetail(response.data.data || {});
+			}
+		} catch (e) {
+			console.log('error occured while getting booking data', e);
+		}
+	};
   
-  const getBookingDetails = async () => {
+  const getBookingDetailsList = async () => {
     try { 
       const response = await _get('/bookings');
-      if (response?.data?.status === "200") {
+			if (response?.data?.status === "200") {
         setBookingData(response.data.data || [])
       }
     } catch (e) {

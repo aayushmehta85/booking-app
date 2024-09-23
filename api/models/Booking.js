@@ -8,6 +8,8 @@ const bookingSchema = new Schema({
 	name: { type: String, required: true },
 	phone: { type: String, required: true },
 	price: Number,
+	status: String,
+	numberOfGuests: Number,
 });
 
 const BookingModel = model('Booking', bookingSchema);

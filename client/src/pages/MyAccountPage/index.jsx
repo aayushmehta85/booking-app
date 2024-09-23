@@ -7,6 +7,7 @@ import MyBookings from '../../components/MyBookings';
 import MyAccommodations from '../../components/MyAccommodations';
 import { _post } from '../../../service/apiService';
 import Icon from '../../components/Common/Icons';
+import BookedAccomodation from '../../components/BookedAccomodation';
 
 const MyAccountPage = () => {
 	const { user, ready, setReady , setUser} = useContext(UserContext);
@@ -34,14 +35,16 @@ const MyAccountPage = () => {
   }
   
   const pageContentHandler = () => {
-		const { PROFILE, MY_BOOKINGS, MY_ACCOMMODATIONS } = ACCOUNT_TYPE;
+		const { PROFILE, MY_BOOKINGS, MY_ACCOMMODATIONS, BOOKED_ACCOMMODATIONS } = ACCOUNT_TYPE;
     switch (subpage) {
       case PROFILE:
         return <MyProfile user={user} logoutHandler={logoutHandler} />;
       case MY_BOOKINGS:
-        return <MyBookings user={user} />
+        return <MyBookings/>
       case MY_ACCOMMODATIONS:
-        return <MyAccommodations user={user} />;
+				return <MyAccommodations/>;
+			case BOOKED_ACCOMMODATIONS:
+				return <BookedAccomodation/>
 			default:
 				return <MyProfile user={user} />;
 		}
@@ -64,6 +67,13 @@ const MyAccountPage = () => {
 				>
 					<Icon type="building-icon" />
 					My accommodations
+				</Link>
+				<Link
+					className={activeLinkClasses(ACCOUNT_TYPE.BOOKED_ACCOMMODATIONS)}
+					to={'/my-account/booked-places'}
+				>
+					<Icon type="building-icon" />
+					Booked accommodations
 				</Link>
 			</nav>
 			{pageContentHandler()}

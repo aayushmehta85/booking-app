@@ -213,7 +213,6 @@ app.get('/user-places', async (req, res) => {
 			description: 'Request fail.',
 		});
 	}
-	
 })
 
 app.post('/delete-user-place/:id', async (req, res) => {
@@ -241,6 +240,7 @@ app.get('/user-places/:id', async (req, res) => {
 		});
 	}
 });
+
 
 // this places refer to the list on the home page
 app.get('/places', async (req, res) => {
@@ -271,7 +271,7 @@ app.get('/place/:id', async (req, res) => {
 app.post('/bookings', async (req, res) => {
 	try {
 		const userData = await getUserDataFromReq(req);
-		const { place, checkIn, checkOut, numberOfGuests, name, phone } = req.body;
+		const { place, checkIn, checkOut, numberOfGuests, name, phone, status, price } = req.body;
 		const bookingDoc = await Booking.create({
 			place,
 			checkIn,
@@ -280,6 +280,8 @@ app.post('/bookings', async (req, res) => {
 			name,
 			phone,
 			user: userData.id,
+			status,
+			price,
 		});
 		return res.json({ status: '200', description: 'Request successfully submitted.', data: bookingDoc });
 	} catch (e) {
@@ -302,8 +304,53 @@ app.get('/bookings', async (req, res) => {
 			description: 'Request fail.',
 		});
 	}
-	
-	return res.json();
+});
+
+app.get('/bookings/:id', async (req, res) => {
+	const { id } = req.params;
+	try {
+		const userData = await getUserDataFromReq(req);
+		const bookingDoc = await Booking.find({ user: userData.id }).populate('place');
+		const newUpdatedData = bookingDoc.filter(item=>item._id.toString()===id)
+		return res.json({
+			status: '200',
+			description: 'Request successfully processed.',
+			data: newUpdatedData[0],
+		});
+	} catch (e) {
+		return res.json({
+			status: '500',
+			description: 'Request fail.',
+		});
+	}
+});
+
+app.get('/booked-users/:id', async (req, res) => {
+	const { id } = req.params;
+	try {
+		const bookingDoc = await Booking.find().populate('place');
+		const updatedDocData = bookingDoc.filter(item => item.place._id.toString() === id) || []; 
+		return res.json({ status: '200', description: 'Request successfully processed.', data: updatedDocData });
+	} catch (e) {
+		return res.json({
+			status: '500',
+			description: 'Request fail.',
+		});
+	}
+});
+
+app.post('/cancel-booked-users/:id', async (req, res) => {
+	const { id } = req.params;
+	try {
+		const placeDoc = await Booking.updateOne({ _id: id }, { $set: { status: 'rejected' } });
+		
+		return res.json({ status: '200', description: 'Request successfully submitted.' });
+	} catch (err) {
+		return res.json({
+			status: '500',
+			description: 'Request fail.',
+		});
+	}
 });
 
 

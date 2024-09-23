@@ -34,12 +34,12 @@ const BookingWidget = ({ place }) => {
 	}
 
   const bookThisPlace = async () => {
-    const payload = { ...formData, place: place._id, price: numberOfNights * place.price };
+    const payload = { ...formData, place: place._id, price: numberOfNights * place.price, status:"approved" };
     try {
       const response = await _post('/bookings', payload);
       if (response?.data?.status === "200") {
         const bookingId = response?.data?.data?._id
-          navigate(`/my-account/bookings/${bookingId}`);
+				navigate(`/my-account/bookings`);
       }
     } catch (e) {
       console.log("error occured while booking.")
