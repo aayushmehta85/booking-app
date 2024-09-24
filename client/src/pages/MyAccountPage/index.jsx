@@ -72,7 +72,7 @@ const MyAccountPage = () => {
 					className={activeLinkClasses(ACCOUNT_TYPE.BOOKED_ACCOMMODATIONS)}
 					to={'/my-account/booked-places'}
 				>
-					<Icon type="building-icon" />
+					<Icon type="booked-building" />
 					Booked accommodations
 				</Link>
 			</nav>
