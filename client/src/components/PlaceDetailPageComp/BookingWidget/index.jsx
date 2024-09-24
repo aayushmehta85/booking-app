@@ -39,7 +39,7 @@ const BookingWidget = ({ place }) => {
       const response = await _post('/bookings', payload);
       if (response?.data?.status === "200") {
         const bookingId = response?.data?.data?._id
-				navigate(`/my-account/bookings`);
+				navigate(`/my-account/bookings/${bookingId}`);
       }
     } catch (e) {
       console.log("error occured while booking.")

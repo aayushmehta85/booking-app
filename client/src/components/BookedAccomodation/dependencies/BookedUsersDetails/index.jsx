@@ -62,12 +62,12 @@ const BookedUsersDetails = ({ id }) => {
 									<div className="overflow-x-auto">
 										<table className="w-full my-0 align-middle text-dark border-neutral-200">
 											<thead className="align-bottom">
-												<tr className="text-[0.95rem] text-secondary-dark">
+												<tr className="text-[0.95rem] text-secondary-dark border-b">
 													<th className="pb-3 text-start min-w-[175px]">Name</th>
 													<th className="pb-3 text-center min-w-[100px]">Phone</th>
 													<th className="pb-3 text-center min-w-[100px]">Check-In</th>
-													<th className="pb-3 text-center min-w-[175px]">Check-Out</th>
-													<th className="pb-3 text-center min-w-[100px]">Guests</th>
+													<th className="pb-3 text-center min-w-[100px]">Check-Out</th>
+													<th className="pb-3 text-center min-w-[50px]">Guests</th>
 													<th className="pb-3 text-center min-w-[100px]">Total Paid</th>
 													<th className="pb-3 text-center min-w-[50px]">Status</th>
 													<th className="pb-3 text-center min-w-[50px]">Action</th>
@@ -75,7 +75,7 @@ const BookedUsersDetails = ({ id }) => {
 											</thead>
 											<tbody>
 												{bookedUsers?.length > 0 &&
-													bookedUsers.map((user,index) => {
+													bookedUsers.map((user, index) => {
 														const {
 															_id,
 															name,
@@ -88,8 +88,8 @@ const BookedUsersDetails = ({ id }) => {
 															price = numberOfGuests * place.price,
 														} = user;
 														return (
-															<tr key={_id} className="border-b border-dashed last:border-b-0">
-																<td className="p-3 pl-0">
+															<tr key={_id} className="border-b border-dashed last:border-b-0 ">
+																<td className="p-3 pl-0 border-r">
 																	<div className="flex items-center">
 																		<div className="flex flex-col justify-start">
 																			<span className="mb-1 transition-colors duration-200 ease-in-out text-lg/normal text-secondary-inverse hover:text-primary">
@@ -98,33 +98,38 @@ const BookedUsersDetails = ({ id }) => {
 																		</div>
 																	</div>
 																</td>
-																<td className="p-3 pr-0 text-center">
+																<td className="px-3 text-center border-r">
 																	<span className="text-light-inverse text-md/normal">{phone}</span>
 																</td>
-																<td className="p-3 pr-0 text-center">
+																<td className="px-3 text-center border-r">
 																	<span className="text-light-inverse text-md/normal">
 																		{checkIn && formatDate(checkIn)}
 																	</span>
 																</td>
-																<td className="p-3 pr-0 text-center">
+																<td className="px-3 text-center border-r">
 																	<span className="text-light-inverse text-md/normal">
 																		{checkOut && formatDate(checkOut)}
 																	</span>
 																</td>
-																<td className="p-3 pr-12 text-center">
+																<td className="p-3 pr-5 text-center border-r">
 																	<span className="text-center align-baseline inline-flex px-4 py-3 mr-auto items-center text-[.95rem] leading-none text-primary bg-primary-light rounded-lg">
 																		{numberOfGuests}
 																	</span>
 																</td>
-																<td className="pr-0 text-center">
+																<td className=" px-3 text-center border-r">
 																	<span className="text-light-inverse text-md/normal">{price}</span>
 																</td>
-																<td className="p-3 pr-0 text-center">
+																<td className="px-3 text-center border-r">
 																	{status === 'approved' ? 'Booked' : 'Booking Cancelled'}
 																</td>
 																{status === 'approved' && (
-																	<td className="p-3 pr-0 text-center">
-																		<button className="primary" onClick={()=>cancelBookingHandler(_id,index)}>Cancel Booking</button>
+																	<td className="px-3 text-center">
+																		<button
+																			className="primary"
+																			onClick={() => cancelBookingHandler(_id, index)}
+																		>
+																			Cancel Booking
+																		</button>
 																	</td>
 																)}
 															</tr>

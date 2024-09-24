@@ -29,7 +29,7 @@ const BookedAccomodation = () => {
 		<>
 			{!action ? (
 				<div className="mt-4">
-					{placesData?.length > 0 &&
+					{placesData?.length > 0 ? (
 						placesData.map((place) => {
 							const { title, _id, photos, description } = place;
 							return (
@@ -50,7 +50,12 @@ const BookedAccomodation = () => {
 									</Link>
 								</div>
 							);
-						})}
+						})
+					) : (
+						<div className="flex justify-center text-2xl h-96 items-center">
+							No booking is done for this place.
+						</div>
+					)}
 				</div>
 			) : (
 				<BookedUsersDetails id={action} />

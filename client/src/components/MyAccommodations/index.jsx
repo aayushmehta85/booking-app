@@ -22,21 +22,21 @@ const MyAccommodations = () => {
 				setPlacesData(response.data.data || []);
 			}
 		} catch (e) {
-			console.log('err occurred while calling places API',e);
+			console.log('err occurred while calling places API', e);
 		}
 	};
 
 	const removeAccomodation = async (id) => {
 		try {
-			const response = await _post(`/delete-user-place/${ id }`);
-			if (response?.data?.status === "200") {
-				const updatedArr = placesData.filter(place => place._id !== id)
+			const response = await _post(`/delete-user-place/${id}`);
+			if (response?.data?.status === '200') {
+				const updatedArr = placesData.filter((place) => place._id !== id);
 				setPlacesData(updatedArr);
 			}
 		} catch (e) {
-			console.log("remove api failed.")
+			console.log('remove api failed.');
 		}
-	}
+	};
 
 	return (
 		<div>
@@ -69,12 +69,12 @@ const MyAccommodations = () => {
 												</p>
 											</div>
 										</Link>
-										<div
+										{/* <div
 											className="absolute top-2 right-2 cursor-pointer text-white bg-black bg-opacity-50 rounded-2xl py-1 px-2"
 											onClick={() => removeAccomodation(_id)}
 										>
 											<Icon type="trash" />
-										</div>
+										</div> */}
 									</div>
 								);
 							})}
